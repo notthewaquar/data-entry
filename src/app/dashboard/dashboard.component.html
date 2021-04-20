@@ -1,0 +1,519 @@
+<div class="d-main-div">
+  <!-- <mat-card>
+    <h5>Search Entries</h5>
+    <mat-form-field class="w-100">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search entries" #input>
+    </mat-form-field>
+  </mat-card> -->
+  <mat-card>
+    <div class="table-div">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="businessName">
+          <th mat-header-cell *matHeaderCellDef>
+            <p mat-sort-header>Business Name</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="businessNameFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.businessName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="primaryCatagory">
+          <th mat-header-cell *matHeaderCellDef>
+            <p mat-sort-header>Primary Catagory</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="primaryCatagoryFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.primaryCatagory}} </td>
+        </ng-container>
+        <ng-container matColumnDef="businessCategory">
+          <th class="w-200" mat-header-cell *matHeaderCellDef>
+            <p mat-sort-header>Services Offered</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="businessCategoryFilter">
+            </mat-form-field>
+          </th>
+          <td class="fz10" mat-cell *matCellDef="let element"> {{element.businessCategory.substring(0, 20)}} ... </td>
+        </ng-container>
+        <ng-container matColumnDef="servicesOffered" style="display: none !important;">
+          <th mat-header-cell *matHeaderCellDef>
+            <p mat-sort-header>Services Offered</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="servicesOfferedFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.servicesOffered}} </td>
+        </ng-container>
+        <ng-container matColumnDef="desOfService">
+          <th mat-header-cell *matHeaderCellDef>
+            <p mat-sort-header>Description of Service</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="desOfServiceFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.desOfService}} </td>
+        </ng-container>
+        <ng-container matColumnDef="onlineService">
+          <th mat-header-cell *matHeaderCellDef>
+            <p mat-sort-header>County</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="onlineServiceFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.onlineService}} </td>
+        </ng-container>
+        <ng-container matColumnDef="addressLine1">
+          <th mat-header-cell *matHeaderCellDef>
+            <p mat-sort-header>Address Line 1</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="addressLine1Filter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.addressLine1}} </td>
+        </ng-container>
+        <ng-container matColumnDef="addressLine2">
+          <th mat-header-cell *matHeaderCellDef>
+            <p mat-sort-header>Address Line 2</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="addressLine2Filter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.addressLine2}} </td>
+        </ng-container>
+        <ng-container matColumnDef="addressLine3">
+          <th mat-header-cell *matHeaderCellDef style="display: none !important;">
+            <p mat-sort-header>Address Line 3</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="addressLine3Filter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.addressLine3}} </td>
+        </ng-container>
+        <ng-container matColumnDef="country">
+          <th mat-header-cell *matHeaderCellDef>
+            <p mat-sort-header>Country</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="countryFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+        </ng-container>
+        <ng-container matColumnDef="postcode">
+          <th mat-header-cell *matHeaderCellDef>
+            <p mat-sort-header>Postcode</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="postcodeFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.postcode}} </td>
+        </ng-container>
+        <ng-container matColumnDef="copmanyName">
+          <th mat-header-cell *matHeaderCellDef>
+            <p mat-sort-header>Copmany Name</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="copmanyNameFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.copmanyName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="companyAddress">
+          <th mat-header-cell *matHeaderCellDef>
+            <p mat-sort-header>Door Number</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="companyAddressFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.companyAddress}} </td>
+        </ng-container>
+        <ng-container matColumnDef="companyNumber">
+          <th mat-header-cell *matHeaderCellDef>
+            <p mat-sort-header>Company Number</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="companyNumberFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.companyNumber}} </td>
+        </ng-container>
+        <ng-container matColumnDef="nameOfContact">
+          <th mat-header-cell *matHeaderCellDef>
+            <p mat-sort-header>Name of Contact</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="nameOfContactFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.nameOfContact}} </td>
+        </ng-container>
+        <ng-container matColumnDef="emailOfContactPerson">
+          <th mat-header-cell *matHeaderCellDef>
+            <p mat-sort-header>Email of Contact Person</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="emailOfContactPersonFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.emailOfContactPerson}} </td>
+        </ng-container>
+        <ng-container matColumnDef="telephoneNumber">
+          <th mat-header-cell *matHeaderCellDef>
+            <p>Telephone Number</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="telephoneNumberFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.telephoneNumber}} </td>
+        </ng-container>
+        <ng-container matColumnDef="cellphoneNumber">
+          <th mat-header-cell *matHeaderCellDef>
+            <p>Cellphone Number</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="cellphoneNumberFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.cellphoneNumber}} </td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>
+            <p>Email</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="emailFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+        <ng-container matColumnDef="website">
+          <th mat-header-cell *matHeaderCellDef>
+            <p>Website</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="websiteFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.website}} </td>
+        </ng-container>
+        <ng-container matColumnDef="fbAccount">
+          <th mat-header-cell *matHeaderCellDef>
+            <p>Facebook Account</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="fbAccountFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.fbAccount}} </td>
+        </ng-container>
+        <ng-container matColumnDef="fbFollower">
+          <th mat-header-cell *matHeaderCellDef>
+            <p>Follower/s</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="fbFollowerFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.fbFollower}} </td>
+        </ng-container>
+        <ng-container matColumnDef="instaAccount">
+          <th mat-header-cell *matHeaderCellDef>
+            <p>Instagram Account</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="instaAccountFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.instaAccount}} </td>
+        </ng-container>
+        <ng-container matColumnDef="instaFollower">
+          <th mat-header-cell *matHeaderCellDef>
+            <p>Follower/s</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="instaFollowerFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.instaFollower}} </td>
+        </ng-container>
+        <ng-container matColumnDef="twitterAccount">
+          <th mat-header-cell *matHeaderCellDef>
+            <p>Twitter Account</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="twitterAccountFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.twitterAccount}} </td>
+        </ng-container>
+        <ng-container matColumnDef="twitterFollower">
+          <th mat-header-cell *matHeaderCellDef>
+            <p>Follower/s</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="twitterFollowerFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.twitterFollower}} </td>
+        </ng-container>
+        <ng-container matColumnDef="youtubeChannel">
+          <th mat-header-cell *matHeaderCellDef>
+            <p>Youtube Channel</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="youtubeChannelFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.youtubeChannel}} </td>
+        </ng-container>
+        <ng-container matColumnDef="youtubeSubscriber">
+          <th mat-header-cell *matHeaderCellDef>
+            <p>Subscriber/s</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="youtubeSubscriberFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.youtubeSubscriber}} </td>
+        </ng-container>
+        <ng-container matColumnDef="pinterestAccount">
+          <th mat-header-cell *matHeaderCellDef>
+            <p>Pinterest Account</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="pinterestAccountFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.pinterestAccount}} </td>
+        </ng-container>
+        <ng-container matColumnDef="pinterestFollower">
+          <th mat-header-cell *matHeaderCellDef>
+            <p>Follower/s</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="pinterestFollowerFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.pinterestFollower}} </td>
+        </ng-container>
+        <ng-container matColumnDef="createdDate">
+          <th mat-header-cell *matHeaderCellDef>
+            <p>Created Date</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="createdDateFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.createdDate}} </td>
+        </ng-container>
+        <ng-container matColumnDef="updatedDate">
+          <th mat-header-cell *matHeaderCellDef>
+            <p>Updated Date</p>
+            <mat-form-field floatLabel="never">
+              <mat-label>Search</mat-label>
+              <input autocomplete="off" matInput [formControl]="updatedDateFilter">
+            </mat-form-field>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.updatedDate}} </td>
+        </ng-container>
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef class="text-center">
+            <p>Action</p>
+          </th>
+          <td mat-cell *matCellDef="let element" class="d-flex justify-content-between action-btn-div">
+            <button
+              type="button"
+              mat-raised-button
+              (click)="viewData(element.id)"
+              color="primary">
+              <i class="fas fa-eye"></i>
+            </button> 
+            <span>|</span> 
+            <button
+              type="button"
+              (click)="onEditOne(element.id)"
+              mat-raised-button
+              color="accent">
+              <i class="fas fa-feather-alt"></i>
+            </button> 
+            <span>|</span> 
+            <button
+              type="button"
+              (click)="onDeleteOne(element.id)"
+              mat-raised-button
+              color="warn">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+    <mat-paginator
+      [length]="100"
+      [pageSize]="50"
+      [pageSizeOptions]="[10, 25, 50, 100, 250, 500]"
+      (page)="onChangedPage($event)"
+      showFirstLastButtons>
+    </mat-paginator>
+  </mat-card>
+</div>
+<div class="my-spinner" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="preview-modal" *ngIf="previewMode">
+  <div class="backdrop-overlay"></div>
+<mat-card class="row">
+  <div class="close-div">
+    <i class="" (click)="closePreviewModel()">close</i>
+    <!-- <i (click)="editData()" class="far fa-times-circle"></i> -->
+  </div>
+  <div class="col-12">
+    <h2>Preview Form</h2>
+  </div>
+  <div class="col-12">
+    <b>Business Name:</b>
+    <span>{{ previewData.businessName }}</span>
+  </div>
+  <div class="col-12">
+    <b>Primary Catagory</b>
+    <span>{{ previewData.primaryCatagory }}</span>
+  </div>
+  <div class="col-12">
+    <b>Services Offered:</b>
+    <span>{{ previewData.businessCategory }}</span>
+  </div>
+  <div class="col-12" style="display: none !important;">
+    <b>Services Offered:</b>
+    <span>{{ previewData.servicesOffered }}</span>
+  </div>
+  <div class="col-12">
+    <b>Description of Service:</b>
+    <span>{{ previewData.desOfService }}</span>
+  </div>
+  <div class="col-12">
+    <b>Postcode:</b>
+    <span>{{ previewData.postcode }}</span>
+  </div>
+  <div class="col-12">
+    <b>Address Line 1:</b>
+    <span>{{ previewData.addressLine1 }}</span>
+  </div>
+  <div class="col-12">
+    <b>Address Line 2:</b>
+    <span>{{ previewData.addressLine2 }}</span>
+  </div>
+  <div class="col-12" style="display: none !important;">
+    <b>Address Line 3:</b>
+    <span>{{ previewData.addressLine3 }}</span>
+  </div>
+  <div class="col-12">
+    <b>County:</b>
+    <span>{{ previewData.onlineService }}</span>
+  </div>
+  <div class="col-12">
+    <b>Country:</b>
+    <span>{{ previewData.country }}</span>
+  </div>
+  <div class="col-12">
+    <b>Door Number:</b>
+    <span>{{ previewData.companyAddress }}</span>
+  </div>
+  <div class="col-12">
+    <b>Copmany Name:</b>
+    <span>{{ previewData.copmanyName }}</span>
+  </div>
+  <div class="col-12">
+    <b>Company Number:</b>
+    <span>{{ previewData.companyNumber }}</span>
+  </div>
+  <div class="col-12">
+    <b>Name of Contact:</b>
+    <span>{{ previewData.nameOfContact }}</span>
+  </div>
+  <div class="col-12">
+    <b>Email of Contact Person:</b>
+    <span>{{ previewData.emailOfContactPerson }}</span>
+  </div>
+  <div class="col-12">
+    <b>Cellphone Number:</b>
+    <span>{{ previewData.cellphoneNumber }}</span>
+  </div>
+  <div class="col-12">
+    <b>Telephone Number:</b>
+    <span>{{ previewData.telephoneNumber }}</span>
+  </div>
+  <div class="col-12">
+    <b>Email:</b>
+    <span>{{ previewData.email }}</span>
+  </div>
+  <div class="col-12">
+    <b>Website:</b>
+    <span>{{ previewData.website }}</span>
+  </div>
+  <div class="col-12">
+    <b>Facebook Account:</b>
+    <span>{{ previewData.fbAccount }}</span>
+  </div>
+  <div class="col-12">
+    <b>Follower/s:</b>
+    <span>{{ previewData.fbFollower }}</span>
+  </div>
+  <div class="col-12">
+    <b>Instagram Account</b>
+    <span>{{ previewData.instaAccount }}</span>
+  </div>
+  <div class="col-12">
+    <b>Follower/s</b>
+    <span>{{ previewData.instaFollower }}</span>
+  </div>
+  <div class="col-12">
+    <b>Twitter Account</b>
+    <span>{{ previewData.twitterAccount }}</span>
+  </div>
+  <div class="col-12">
+    <b>Follower/s</b>
+    <span>{{ previewData.twitterFollower }}</span>
+  </div>
+  <div class="col-12">
+    <b>Youtube Channel</b>
+    <span>{{ previewData.youtubeChannel }}</span>
+  </div>
+  <div class="col-12">
+    <b>Subscriber/s</b>
+    <span>{{ previewData.youtubeSubscriber }}</span>
+  </div>
+  <div class="col-12">
+    <b>Pinterest Account</b>
+    <span>{{ previewData.pinterestAccount }}</span>
+  </div>
+  <div class="col-12">
+    <b>Follower/s</b>
+    <span>{{ previewData.pinterestFollower }}</span>
+  </div>
+  <hr>
+  <div class="col-12 justify-content-between">
+    <button
+    type="button"
+    mat-raised-button
+    color="primary"
+    (click)="closePreviewModel()"
+    >close</button>
+  </div>
+</mat-card>
+</div>

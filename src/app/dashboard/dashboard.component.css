@@ -1,0 +1,51 @@
+.d-main-div {
+  margin: 10px;
+}
+mat-card {
+  margin-bottom: 10px;
+}
+table {
+  width: 100%;
+}
+
+.table-div {
+  overflow-x: auto;
+}
+th {
+  min-width: 60px;
+  white-space: pre;
+  padding: 0 10px !important;
+}
+td {
+  min-width: 60px;
+  padding: 0 10px !important;
+}
+h5 {
+  font-weight: 500;
+  font-size: 18px;
+  margin: 0;
+}
+th {
+}
+th p {
+  margin: 0;
+  font-weight: 500;
+  color: #333;
+  font-size: 14px;
+}
+.w-200 {
+  width: 200px;
+  min-width: 200px;
+}
+
+.fz10 {
+  font-size: 10px;
+}
+.action-btn-div{}
+.action-btn-div button{}
+.action-btn-div span{
+  display: flex;
+  width: 15px;
+  justify-content: center;
+  align-items: center;
+}

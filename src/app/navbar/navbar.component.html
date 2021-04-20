@@ -1,0 +1,78 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav 
+  #sidenav
+  mode="over"
+  [(opened)]="opened"
+  (opened)="events.push('open!')"
+  (closed)="events.push('close!')">
+    <mat-toolbar>
+      Menu
+    </mat-toolbar>
+    <mat-nav-list>
+      <a 
+        mat-list-item
+        routerLinkActive="active"
+        routerLink="/create-form"
+        (click)="sidenav.toggle()">
+        <i class="fas fa-folder-plus"></i>
+        &nbsp;&nbsp;
+        Add New Data
+      </a>
+      <a 
+        mat-list-item
+        routerLinkActive="active" 
+        routerLink="/dashboard"
+        (click)="sidenav.toggle()">
+        <i class="fas fa-cubes"></i>
+        &nbsp;&nbsp;
+        Dashboard
+      </a>
+      <a 
+        mat-list-item
+        (click)="onLogout()">
+        <i class="fas fa-power-off"></i>
+        &nbsp;&nbsp;
+        Logout
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        *ngIf="isAuthenticated"
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="sidenav.toggle()">
+        <i class="fa fa-bars"></i>
+      </button>
+      <span class="navbar-brand" routerLink="">
+        DATA ENTRY
+        <!-- <br>
+        <small>...</small> -->
+      </span>
+      <div style="margin-left: auto;" class="nav-menu-link">
+        <a
+          mat-raised-button
+          routerLinkActive="active"
+          routerLink="/create-form">
+          <i class="fas fa-folder-plus"></i>
+        </a>
+        <a
+          *ngIf="isAuthenticated"
+          mat-raised-button
+          routerLinkActive="active" 
+          routerLink="/dashboard">
+          <i class="fas fa-cubes"></i>
+        </a>
+        <!-- <a
+          *ngIf="isAuthenticated" 
+          mat-raised-button
+          (click)="onLogout()">
+          <i class="fas fa-power-off"></i>
+        </a> -->
+      </div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

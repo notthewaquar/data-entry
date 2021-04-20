@@ -1,0 +1,529 @@
+<mat-card class="data-entry-form">
+  <h2>Data Entry Form</h2>
+  <hr>
+  <form class="row" [formGroup]="dataEntryForm" (ngSubmit)="onSubmit()" #dataEntryRef="ngForm">
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fas fa-building"></i>
+      </button>
+      <mat-form-field appearance="fill" class="">
+        <mat-label>Business Name</mat-label>
+        <input matInput placeholder="" formControlName="businessName">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fas fa-bolt"></i>
+      </button>
+      <mat-form-field appearance="fill" class="col-md-6 col-12">
+        <mat-label>Primary Catagory *</mat-label>
+        <mat-select formControlName="primaryCatagory" (selectionChange)="setBusinessCategory()">
+          <mat-option *ngFor="let eachCatagory of primaryCatagoryArr; let i = index" [value]="eachCatagory">
+            {{ primaryCatagoryArr[i] }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-12 sso-div">
+      <button
+        type="button"
+        color="primary"
+        (click)="sOffModal()"
+        mat-raised-button>Select Services Offered</button>
+    </div>
+    <div *ngIf="serviceOffModalOpen" class="backdrop-overlay"></div>
+    <div *ngIf="serviceOffModalOpen" class="service-modal">
+      <h4>Select Services Offered</h4>
+      <span class="close" (click)="sOffModal()">close X</span>
+      <b>Selected:</b>
+      <div class="mat-clips-so">
+        <mat-chip-list aria-label="Fish selection">
+          <mat-chip
+            *ngFor="let chipVal of serOffChips"
+            color="primary"
+            selected
+            >{{ chipVal }}</mat-chip>
+        </mat-chip-list>
+      </div>
+      <div class="form-icon-div"
+      style="display: none !important;"
+      >
+        <button type="button" mat-flat-button color="primary" tabindex="-1">
+          <i class="fas fa-layer-group"></i>
+        </button>
+        <mat-form-field appearance="fill">
+          <mat-label>Services Offered</mat-label>
+          <input matInput placeholder="" formControlName="businessCategory">
+        </mat-form-field>
+      </div>
+      <ul class="checkbox-mlist">
+        <li *ngFor="let filters of selectedSerOff11; let i = index">
+          <mat-checkbox
+            color="primary"
+            [value]="filters.value"
+            [checked]="filters.checked"
+            (change)="onCheckChange(i, $event)">
+            {{filters.value}}
+          </mat-checkbox>
+        </li>
+      </ul>
+
+        <button
+        type="button"
+        mat-raised-button
+        (click)="onSoChecked()"
+        >Select all</button>
+        <!-- (click)="toggleAllSelection()" -->
+      <br><br>
+      <div class="btn-11">
+        <button
+          type="button"
+          color="primary"
+          (click)="saveSerOffModal()"
+          mat-raised-button>SUBMIT</button>
+        <button
+          type="button"
+          color="warn"
+          (click)="sOffModal()"
+          mat-raised-button>CLOSE</button>
+      </div>
+    </div>
+    <!-- <mat-form-field appearance="fill">
+      <mat-label>Bus cat</mat-label>
+      <mat-select [formControl]="toppings" multiple>
+        <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+      </mat-select>
+    </mat-form-field> -->
+    <div class="col-md-6 col-12 form-icon-div" style="display: none !important;">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fas fa-cubes"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Services Offered</mat-label>
+        <input matInput placeholder="" formControlName="servicesOffered">
+      </mat-form-field>
+    </div>
+    <div class="col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fas fa-address-card"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Description of Service</mat-label>
+        <textarea matInput placeholder="" rows="5" formControlName="desOfService"></textarea>
+      </mat-form-field>
+    </div>
+    <hr class="mt-0">
+    <div class="col-12">
+      <p>Enter postcode to automatically fill addresses</p>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fas fa-mail-bulk"></i>
+      </button>
+      <mat-form-field appearance="fill" class="md-fill">
+        <mat-label>Postcode</mat-label>
+        <input (blur)="onGetAddress()" matInput placeholder="" formControlName="postcode">
+        <mat-spinner *ngIf="isPcLoader" class="input-spinner" [diameter]="20"></mat-spinner>
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fas fa-file-signature"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Copmany Name *</mat-label>
+        <input matInput placeholder="" formControlName="copmanyName">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fas fa-map-marked-alt"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Door Number</mat-label>
+        <input matInput placeholder="" formControlName="companyAddress">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fas fa-phone-alt"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Company Number</mat-label>
+        <input matInput placeholder="" formControlName="companyNumber">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fas fa-map-marked-alt"></i>
+      </button>
+      <!-- 2nd Row -->
+      <mat-form-field appearance="fill">
+        <mat-label>Address Line 1</mat-label>
+        <input matInput placeholder="" formControlName="addressLine1">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fas fa-address-card"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Name of Contact</mat-label>
+        <input matInput placeholder="" formControlName="nameOfContact">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fas fa-map-marked-alt"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Address Line 2</mat-label>
+        <input matInput placeholder="" formControlName="addressLine2">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fas fa-at"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Email of Contact Person</mat-label>
+        <input matInput placeholder="" formControlName="emailOfContactPerson">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div" style="display: none !important;">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fas fa-map-marked-alt"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Address Line 3</mat-label>
+        <input matInput placeholder="" formControlName="addressLine3">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fas fa-address-card"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>County</mat-label>
+        <!-- <mat-label>Online Service</mat-label> -->
+        <input matInput placeholder="" formControlName="onlineService">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fas fa-tty"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Telephone Number</mat-label>
+        <input matInput placeholder="" formControlName="telephoneNumber">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fas fa-map-marked-alt"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Country</mat-label>
+        <input matInput placeholder="" formControlName="country">
+      </mat-form-field>
+    </div>
+    
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fas fa-phone-alt"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Cellphone Number</mat-label>
+        <input matInput placeholder="" formControlName="cellphoneNumber">
+      </mat-form-field>
+    </div>
+    <hr class="mt-0">
+    <div class="col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fas fa-at"></i>
+      </button>
+      <!-- 3rd Row -->
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="" formControlName="email">
+      </mat-form-field>
+    </div>
+    <div class="col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fas fa-globe"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Website</mat-label>
+        <input matInput placeholder="" formControlName="website">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fab fa-facebook-f"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Facebook Account</mat-label>
+        <input matInput placeholder="" formControlName="fbAccount">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fab fa-facebook-f"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Follower/s</mat-label>
+        <input matInput placeholder="" formControlName="fbFollower">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fab fa-instagram"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Instagram Account</mat-label>
+        <input matInput placeholder="" formControlName="instaAccount">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fab fa-instagram"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Follower/s</mat-label>
+        <input matInput placeholder="" formControlName="instaFollower">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fab fa-twitter"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Twitter Account</mat-label>
+        <input matInput placeholder="" formControlName="twitterAccount">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fab fa-twitter"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Follower/s</mat-label>
+        <input matInput placeholder="" formControlName="twitterFollower">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fab fa-youtube"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Youtube Channel</mat-label>
+        <input matInput placeholder="" formControlName="youtubeChannel">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fab fa-youtube"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Subscriber/s</mat-label>
+        <input matInput placeholder="" formControlName="youtubeSubscriber">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fab fa-pinterest"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Pinterest Account</mat-label>
+        <input matInput placeholder="" formControlName="pinterestAccount">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 col-12 form-icon-div">
+      <button type="button" mat-flat-button color="primary" tabindex="-1">
+        <i class="fab fa-pinterest"></i>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Follower/s</mat-label>
+        <input matInput placeholder="" formControlName="pinterestFollower">
+      </mat-form-field>
+    </div>
+    <div class="col-12 justify-content-center btn-div-11">
+      <button type="submit" mat-raised-button color="primary">
+        <i class="fas fa-check"></i>
+        &nbsp;&nbsp;
+        Submit 
+      </button>
+      <span class="btwn-btn"></span>
+      <button type="button" mat-raised-button color="warn" (click)="resetForm1()">
+        <i class="fas fa-redo-alt"></i>
+        &nbsp;&nbsp;
+        Reset Form
+      </button>
+    </div>
+    <!-- <div class="col-12">
+      
+    </div> -->
+  </form>
+</mat-card>
+<br>
+<div *ngIf="previewMode">
+  <app-preiew-mode></app-preiew-mode>
+</div>
+<!-- 
+<mat-form-field appearance="fill" class="example-full-width">
+  <mat-label>Primary Catagory</mat-label>
+  <input type="text"
+          placeholder="Pick one"
+          aria-label="Primary Catagory"
+          matInput
+          [formControl]="myControl"
+          [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option
+      *ngFor="let option of filteredOptions | async"
+      [value]="option">
+      {{option}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+-->
+<div class="preview-modal" *ngIf="previewMode">
+  <div class="backdrop-overlay"></div>
+  <mat-card class="row">
+    <div class="close-div">
+      <i class="" (click)="editData()">close</i>
+      <!-- <i (click)="editData()" class="far fa-times-circle"></i> -->
+    </div>
+    <div class="col-12">
+      <h2>Preview Form</h2>
+    </div>
+    <div class="col-12">
+      <b>Business Name:</b>
+      <span>{{ dataEntryFormDATA.businessName }}</span>
+    </div>
+    <div class="col-12">
+      <b>Primary Catagory</b>
+      <span>{{ dataEntryFormDATA.primaryCatagory }}</span>
+    </div>
+    <div class="col-12">
+      <b>Services Offered:</b>
+      <span>{{ dataEntryFormDATA.businessCategory }}</span>
+    </div>
+    <div class="col-12" style="display: none !important;">
+      <b>Services Offered:</b>
+      <span>{{ dataEntryFormDATA.servicesOffered }}</span>
+    </div>
+    <div class="col-12">
+      <b>Description of Service:</b>
+      <span>{{ dataEntryFormDATA.desOfService }}</span>
+    </div>
+    <div class="col-12">
+      <b>Postcode:</b>
+      <span>{{ dataEntryFormDATA.postcode }}</span>
+    </div>
+    <div class="col-12">
+      <b>Address Line 1:</b>
+      <span>{{ dataEntryFormDATA.addressLine1 }}</span>
+    </div>
+    <div class="col-12">
+      <b>Address Line 2:</b>
+      <span>{{ dataEntryFormDATA.addressLine2 }}</span>
+    </div>
+    <div class="col-12" style="display: none !important;">
+      <b>Address Line 3:</b>
+      <span>{{ dataEntryFormDATA.addressLine3 }}</span>
+    </div>
+    <div class="col-12">
+      <b>County:</b>
+      <span>{{ dataEntryFormDATA.onlineService }}</span>
+    </div>
+    <div class="col-12">
+      <b>Country:</b>
+      <span>{{ dataEntryFormDATA.country }}</span>
+    </div>
+    <div class="col-12">
+      <b>Door Number:</b>
+      <span>{{ dataEntryFormDATA.companyAddress }}</span>
+    </div>
+    <div class="col-12">
+      <b>Copmany Name:</b>
+      <span>{{ dataEntryFormDATA.copmanyName }}</span>
+    </div>
+    <div class="col-12">
+      <b>Company Number:</b>
+      <span>{{ dataEntryFormDATA.companyNumber }}</span>
+    </div>
+    <div class="col-12">
+      <b>Name of Contact:</b>
+      <span>{{ dataEntryFormDATA.nameOfContact }}</span>
+    </div>
+    <div class="col-12">
+      <b>Email of Contact Person:</b>
+      <span>{{ dataEntryFormDATA.emailOfContactPerson }}</span>
+    </div>
+    <div class="col-12">
+      <b>Cellphone Number:</b>
+      <span>{{ dataEntryFormDATA.cellphoneNumber }}</span>
+    </div>
+    <div class="col-12">
+      <b>Telephone Number:</b>
+      <span>{{ dataEntryFormDATA.telephoneNumber }}</span>
+    </div>
+    <div class="col-12">
+      <b>Email:</b>
+      <span>{{ dataEntryFormDATA.email }}</span>
+    </div>
+    <div class="col-12">
+      <b>Website:</b>
+      <span>{{ dataEntryFormDATA.website }}</span>
+    </div>
+    <div class="col-12">
+      <b>Facebook Account:</b>
+      <span>{{ dataEntryFormDATA.fbAccount }}</span>
+    </div>
+    <div class="col-12">
+      <b>Follower/s:</b>
+      <span>{{ dataEntryFormDATA.fbFollower }}</span>
+    </div>
+    <div class="col-12">
+      <b>Instagram Account</b>
+      <span>{{ dataEntryFormDATA.instaAccount }}</span>
+    </div>
+    <div class="col-12">
+      <b>Follower/s</b>
+      <span>{{ dataEntryFormDATA.instaFollower }}</span>
+    </div>
+    <div class="col-12">
+      <b>Twitter Account</b>
+      <span>{{ dataEntryFormDATA.twitterAccount }}</span>
+    </div>
+    <div class="col-12">
+      <b>Follower/s</b>
+      <span>{{ dataEntryFormDATA.twitterFollower }}</span>
+    </div>
+    <div class="col-12">
+      <b>Youtube Channel</b>
+      <span>{{ dataEntryFormDATA.youtubeChannel }}</span>
+    </div>
+    <div class="col-12">
+      <b>Subscriber/s</b>
+      <span>{{ dataEntryFormDATA.youtubeSubscriber }}</span>
+    </div>
+    <div class="col-12">
+      <b>Pinterest Account</b>
+      <span>{{ dataEntryFormDATA.pinterestAccount }}</span>
+    </div>
+    <div class="col-12">
+      <b>Follower/s</b>
+      <span>{{ dataEntryFormDATA.pinterestFollower }}</span>
+    </div>
+    <hr>
+    <div class="col-12 justify-content-between">
+      <button type="button" mat-raised-button color="primary" (click)="ConfirmData()">Confirm</button>
+      <button type="button" mat-raised-button color="warn" (click)="editData()">Edit</button>
+    </div>
+  </mat-card>
+</div>
+<div class="my-spinner" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>

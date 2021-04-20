@@ -1,0 +1,7 @@
+How to use
+----------
+
+Run "npm install" inside this project folder to install all dependencies.
+
+Make sure you use the latest version of the CLI (upgrade guide below)
+

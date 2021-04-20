@@ -1,0 +1,108 @@
+mat-card.data-entry-form {
+  width: 75vw;
+  margin: 20px auto;
+}
+@media only screen and (max-width: 770px) {
+  mat-card.data-entry-form {
+    width: auto;
+    margin: 10px;
+  }
+}
+
+.input-spinner {
+  position: absolute;
+  top: 0;
+  left: auto;
+  right: 0;
+}
+.form-icon-div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  box-shadow: 0 0 10px -5px #111;
+}
+.form-icon-div button {
+  height: 100%;
+  padding: 0;
+  /* background: #6a5acd; */
+  border-radius: 4px 0 0 4px;
+}
+.form-icon-div button svg {
+  font-size: 22px;
+}
+.form-icon-div mat-form-field {
+  width: 100%;
+  width: -webkit-fill-available;
+}
+.btwn-btn {
+  display: inline-block;
+  width: 10px;
+}
+.btn-div-11 svg {
+  font-size: 16px;
+}
+.backdrop-overlay {
+  z-index: 9;
+}
+.service-modal {
+  z-index: 10;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #0000006b;
+  width: 80vw;
+}
+.service-modal h4 {
+  font-weight: 700;
+  font-size: 18px;
+}
+.service-modal .close{
+  position: absolute;
+  top: 20px;
+  left: auto;
+  right: 0;
+  transform: translate(-10px, -10px);
+  background-color: #f44336;
+  padding: 3px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  color: #fff;
+  cursor: pointer;
+}
+.service-modal .mat-clips-so,
+.service-modal .checkbox-mlist {
+  margin: 0 0 10px;
+  padding: 10px;
+  max-height: 25vh;
+  overflow: auto;
+}
+.service-modal .form-icon-div > button {
+  padding: 7px;
+}
+@media only screen and (max-width: 500px) {
+  .service-modal {
+    width: 85vw;
+  }
+}
+mat-slide-toggle {
+  user-select: none;
+}
+.btn-11{
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+.sso-div{
+  
+  text-align: center;
+  margin: 10px 0 20px;
+
+}
+.sso-div button{
+  font-size: 20px;
+  padding: 5px 20px;
+}
