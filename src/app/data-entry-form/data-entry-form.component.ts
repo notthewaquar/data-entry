@@ -192,7 +192,7 @@ export class DataEntryFormComponent implements OnInit {
       }
       this.selectedSerOff11.push(newCheck);
     }
-    console.log(this.selectedSerOff11);
+    // console.log(this.selectedSerOff11);
   }
   // tosslePerOne(all){
   //   this.selectedSerOff11 = this.dataEntryForm.value.businessCategory;
@@ -414,6 +414,7 @@ const mainBussinessCateArr = [
   "Farms,Zoos,Nature Reserves,National Trust Sites,Bird Watching,RSPBA Sites,Wetlands,Moorlands,Heathlands,Woodlands,Forests,Gardens,Aquariums,Gardening School,Plants & Gardens,Plats And Gardens,Cook And Grow Fruits And Vegetables,Garden Museum,Nurseries Garden,Botanical Garden,Children’s Gardening,Wildlife Gardening,Nature Tots Forest School,Garden Centre,Gardening Lessons,Urban Growth Learning Gardens ,Plant Club,Farm Shop,Gardening Shop,Meet The Animals,Adopt A Donkey,Animal Farm,Wildlife,Animal Handling And Grooming Session,Educational Workshop,Adaptation,Guided Visit Workshop,Animals For Hire,Animal Feed,Mobile Farm,Little Zoo,Building,Nature Night Camping,Rainforest Carousel",
   "Art Clubs,Arts And Crafts For Kids,Ballet,Photography,Pottery,Pottery Painting,Art Party,Face Painting,Art Program,Painting,Sewing,Cooking,Glass Painting,Fabric Painting",
   "Pool,Resort,Water sports",
+  "",
   "Baby Massage,Baby Sign Language,Relaxation For Children,Babysitters,Baby Osteopathy,Newborn To Crawling,Baby Development,Baby Communication Skills,Improve Babies Sleep Patterns,Improve Babies Flexibility,Mother And Baby Classes,Messy Play,Toddler Play Frame,Giant Play Frame,Garden Games Toys,Play frames ,Watercolors,Toddler Ballet,Preschool Dance,Preschool Ballet,Baby Ballet,Gymnastics For Toddlers,Baby Clinics,Children's Yoga,Mother And Baby Yoga,Therapeutic Massage,Teenage Skin,Baby Skincare,Child Therapy,Children Counselling,Mummy & Baby Yoga,Home Work,Breakfast,Holiday Club,Holiday Camp,Primary School,Out Of School Club,Nursery Preschool,PE & School Sport,Speech & Language Therapy,Baby & Child Nutritional Therapy,Sensory Messy Play,Melody Movement Parent & Toddler Classes,Kids Parties,Osteopathy For Babies And Children,Childminders & Crèches,Libraries and Story times",
   "Special need clubs,Cycling club,BMX club",
   "Cubs,Guides,Brownies,Scouts",
@@ -433,8 +434,7 @@ const mainBussinessCateArr = [
   "Halls for Hire,Venues for Hire,Church Halls",
   "Local parks,Local playgrounds cafes and other facilities,Improve Babies Sleep Patterns",
   "Child Birth,Pre Natal Yoga,Post Natal Yoga,Pregnancy Relaxation,Hypnobirthing,Fertility Reflexology,Pregnancy Pain Relief,Therapy Pregnancy And Childbirth,Aqua bellies,Aqua Natal Yoga,Postnatal Fitness Classes,Antenatal Fitness Classes,Antenatal Classes,Maternity Reflexology,Yoga In Pregnancy,Hypnobirthing,Ante-Natal And Post-Natal Care,Therapy Pregnancy And Childbirth",
-  "Bonfire Night,Christmas & New Year,Easter,Father's Day,Halloween",
-  "Holiday clubs,Mother's Day,Summer,Valentine's Day",
+  "Bonfire Night,Christmas & New Year,Easter,Father's Day,Halloween,Holiday clubs,Mother's Day,Summer,Valentine's Day",
   "Science Club,Photography Club",
   "Soft Play Centre’s,Children’s Play Area,Playdough,Children's Gym Parties,Messy Play",
   "Mediation,Learning and Development,therapeutic riding ,self defense,Disability Sports,Swimming Lessons With Sign Language,Swimming Lessons For The Deaf,Swimming Lessons For Children With Special Need,Therapeutic Yoga To Children With Learning Disabilities,Therapeutic Yoga To Children With Learning Disabilities",
