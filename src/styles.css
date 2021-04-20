@@ -129,3 +129,7 @@ hr {
 ul {
   list-style: none !important;
 }
+.mat-clips-so .mat-chip.mat-standard-chip::after,
+.sso-div .mat-chip.mat-standard-chip::after {
+  background: none !important;
+}

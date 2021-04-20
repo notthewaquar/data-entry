@@ -7,7 +7,7 @@
         <i class="fas fa-building"></i>
       </button>
       <mat-form-field appearance="fill" class="">
-        <mat-label>Business Name</mat-label>
+        <mat-label>Business Name *</mat-label>
         <input matInput placeholder="" formControlName="businessName">
       </mat-form-field>
     </div>
@@ -28,8 +28,24 @@
       <button
         type="button"
         color="primary"
+        class="aa"
         (click)="sOffModal()"
         mat-raised-button>Select Services Offered</button>
+      <p class="bb" *ngIf="serOffChips.length < 1">No Service Offered is selected</p>
+      <!-- <br>
+      <br> -->
+      <div class="inner-div1">
+        <div class="mat-clips-so" *ngIf="serOffChips.length > 0">
+        <b class="sso-b">Selected Service Offered:</b>
+        <mat-chip-list aria-label="Fish selection">
+          <mat-chip
+            *ngFor="let chipVal of serOffChips"
+            color="primary"
+            selected
+            >{{ chipVal }}</mat-chip>
+        </mat-chip-list>
+      </div>
+      </div>
     </div>
     <div *ngIf="serviceOffModalOpen" class="backdrop-overlay"></div>
     <div *ngIf="serviceOffModalOpen" class="service-modal">

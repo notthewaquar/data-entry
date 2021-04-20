@@ -74,7 +74,7 @@ export class DataEntryFormComponent implements OnInit {
     // console.log(this.selectedBusinessCategory);
     this.previewMode = false;
     this.dataEntryForm = new FormGroup({
-      'businessName': new FormControl(null),
+      'businessName': new FormControl(null, [Validators.required]),
       'primaryCatagory': new FormControl('Animals and Nature', [Validators.required]),
       'businessCategory': new FormControl(null),
       'servicesOffered': new FormControl(null),
@@ -180,6 +180,7 @@ export class DataEntryFormComponent implements OnInit {
     this.selectedBusinessCategory = this.businessCategoryArr[pcI].split(",").sort();
     this.setSelSerOption();
     this.dataEntryForm.value.businessCategory = null;
+    this.serOffChips = [];
   }
   setSelSerOption() {
     this.selectedSerOff11 = [];
@@ -225,6 +226,7 @@ export class DataEntryFormComponent implements OnInit {
   //   this.selectedSerOff11 = this.dataEntryForm.value.businessCategory;
   // }
   onSoChecked() {
+    this.serOffChips = [];
     this.soChecked = !this.soChecked;
     for (let i = 0; i < this.selectedSerOff11.length; i++) {
       this.selectedSerOff11[i].checked = this.soChecked;

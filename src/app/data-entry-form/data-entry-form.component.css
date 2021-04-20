@@ -97,12 +97,27 @@ mat-slide-toggle {
   text-align: center;
 }
 .sso-div{
-  
-  text-align: center;
   margin: 10px 0 20px;
 
 }
-.sso-div button{
-  font-size: 20px;
-  padding: 5px 20px;
+.sso-div button.aa{
+  padding: 10px 20px;
+  height: auto;
+  line-height: initial;
+  font-size: 15px;
+  display: inline-block;
+}
+.sso-div p.bb{
+  display: inline-block;
+  margin-left: 10px;
+  color: #999;
+}
+.sso-b{
+  display: block;
+  text-align: left;
+  font-size: 16px;
+  margin: 0 0 5px;
+}
+.inner-div1{
+  margin: 10px 0 0;
 }
